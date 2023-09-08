@@ -1,23 +1,74 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react"
 
 function App() {
+
+  // state to store the value of coutry
+
+  const [country, setCountry] = useState({ name: "", value: "", cities:[]});
+ 
+  const countries = [
+    {
+      name: "India",
+      value: 'IN',
+      cities: [
+        'Delhi',
+        'Mumbai'
+      ]
+    },
+
+    {
+      name: "Pak",
+      value: 'PK',
+      cities: [
+        'Lahore',
+        'Karachi'
+      ]
+    },
+
+    {
+      name: "Bangaladesh",
+      value: 'BG',
+      cities: [
+        'Dhaka',
+        'Chittagong'
+      ]
+    },
+
+  ];
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    {/* 1st Dropdown  */}
+       <select 
+        value={country}
+        onChange={(e) => {
+           console.log(e.target.value);
+           setCountry(e.target.value)
+       }}
+       >
+           {
+                countries.map((item, index) => {
+                     return  <option value={index}>{item.name}</option>
+                })
+           }
+       </select>
+
+
+     {/* 2nd Dropdown  */}
+
+
+     <select value={country}>
+  { countries[country].cities.map((item, index) => {
+        return <option value={index}>{item}</option>;
+      })
+  }
+       </select>
+
+
+       
     </div>
   );
 }
